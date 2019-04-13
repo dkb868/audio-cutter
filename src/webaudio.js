@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { readArrayBuffer } from './utils'
+import { readArrayBuffer, fetchAudio } from './utils'
 
 export default class WebAudio extends EventEmitter {
   audioContext = new AudioContext()
@@ -109,10 +109,17 @@ export default class WebAudio extends EventEmitter {
    * @param {Blob} blob
    * @return {Promise<AudioBuffer>}
    */
-  static async decode (blob) {
-    const arrayBuffer = await readArrayBuffer(blob)
+  static async decode (url) {
+    // const audioBuffer = await fetchAudio("https://instaud.io/_/3xUG.mp3", async (req) => {
+    //   const arrayBuffer = req.response
+    //   console.log(arrayBuffer)
+    //   const audioBuffer = await new AudioContext().decodeAudioData(arrayBuffer)
+    //   console.log(audioBuffer)
+    //   return audioBuffer
+    // })
+    const arrayBuffer = await fetchAudio(url)
+    // const arrayBuffer = await readArrayBuffer(blob)
     const audioBuffer = await new AudioContext().decodeAudioData(arrayBuffer)
-
     return audioBuffer
   }
 }

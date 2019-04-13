@@ -67,3 +67,14 @@ export const formatSeconds = seconds =>
 export const leftZero = (num, count) => {
   return ('000000' + num).slice(-count)
 }
+
+export const fetchAudio = (url) => {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.responseType = 'arraybuffer'
+    request.onload = () => resolve(request.response)
+    request.onerror = err => reject(err)
+    request.send()
+  })
+}

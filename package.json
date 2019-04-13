@@ -1,5 +1,5 @@
 {
-  "name": "audio-cutter",
+  "name": "audio-cutter-url",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -41,5 +41,8 @@
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1",
     "@mohayonao/web-audio-api-shim": "^0.3.0"
+  },
+  "dependencies": {
+    "react-loader-spinner": "^2.3.0"
   }
 }
