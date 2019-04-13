@@ -1,75 +1,78 @@
-const path = require('path')
+const path = require("path");
 
-const publicPath = 'dist'
-const outputPath = path.resolve(__dirname, 'dist')
+const publicPath = "dist";
+const outputPath = path.resolve(__dirname, "lib");
 
-const isDevServer = process.argv[1].indexOf('webpack-dev-server') !== -1
+const isDevServer = process.argv[1].indexOf("webpack-dev-server") !== -1;
 
 const commonConfig = {
   output: {
     path: outputPath,
     publicPath,
-    filename: '[name].js'
+    libraryTarget: "commonjs2",
+    filename: "[name].js"
   },
 
   resolve: {
-    extensions: ['.jsx', '.js']
+    extensions: [".jsx", ".js"]
   },
 
   module: {
     rules: [
       {
         test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'less-loader',
-        ]
+        use: ["style-loader", "css-loader", "less-loader"]
       },
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         exclude: /node_modules/
       },
       {
         test: /\.svg$/,
-        loader: 'svg-sprite-loader',
+        loader: "svg-sprite-loader",
         options: {
-          symbolId: 'icon-[name]',
-        },
-      },
+          symbolId: "icon-[name]"
+        }
+      }
     ]
   },
 
   devServer: {
     port: 9019,
-    host: '0.0.0.0',
+    host: "0.0.0.0",
     hotOnly: true,
     inline: true,
-    disableHostCheck: true,
+    disableHostCheck: true
   },
 
   externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-  },
-}
+    react: "React",
+    "react-dom": "ReactDOM"
+  }
+};
 
 if (isDevServer) {
-  commonConfig.devtool = 'source-map'
+  commonConfig.devtool = "source-map";
 }
 
 module.exports = [
-  Object.assign({
-    entry: {
-      index: './src/index',
+  Object.assign(
+    {
+      entry: {
+        index: "./src/index"
+      }
     },
-  }, commonConfig),
+    commonConfig
+  ),
 
-  Object.assign({
-    entry: {
-      worker: './src/worker',
+  Object.assign(
+    {
+      entry: {
+        worker: "./src/worker"
+      },
+      target: "webworker"
     },
-    target: 'webworker'
-  }, commonConfig),
-]
+    commonConfig
+  )
+];

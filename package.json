@@ -2,7 +2,7 @@
   "name": "audio-cutter-url",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/audiocutter.js",
   "scripts": {
     "build": "webpack -p",
     "start": "webpack-dev-server --hot",
